@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "sweetpad: launch",
+      "type": "sweetpad",
+      "action": "launch",
+      "problemMatcher": ["$sweetpad-watch"],
+      "isBackground": true
+    }
+  ]
+}

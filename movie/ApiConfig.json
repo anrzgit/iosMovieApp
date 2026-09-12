@@ -1,0 +1,7 @@
+{
+    "baseUrl" : "https://api.themoviedb.org",
+    "apiKey" : "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NjEzNDgxYjc1ZWY4MzQ2MDNmZTlmZDc0MTAyNDQ1ZCIsIm5iZiI6MTc4NjIxMzcxMy42MzYsInN1YiI6IjZhNzc3NTUxNTQwMDliMGNhMGFhYWViYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p_1tDy7i8elrsrakKKFCRQz40_wCM_iUN3POpedM5dk",
+    "youTubeBaseUrl" : "https://www.youtube-nocookie.com/embed",
+    "youTubeApiKey" : "AIzaSyC03rpIwzQ5uF2nUW-2epkqrrV02HH72Q4",
+    "youTubeSearchBaseUrl" : "https://www.googleapis.com/youtube/v3/search"
+}

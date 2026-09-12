@@ -8,11 +8,46 @@
 import SwiftUI
 
 struct HomeView: View {
+    let movieViewModel: MovieViewModel
+    var movie: Movie? { movieViewModel.heroMovie }
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView(.vertical, showsIndicators: false) {
+            LazyVStack(){
+                if let movie {
+                    NavigationLink(destination: MovieDetailView(movie: movie)) {
+                        AsyncImage(url: URL(string: movie.poster_path ?? "")){ image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }placeholder: {
+                            ProgressView()
+                        }
+                    }
+                    HStack(){
+                        Button(){
+
+                        } label: {
+                            Text("Play")
+                                .elevatedButton()
+                        }
+                        Button(){
+
+                        } label: {
+                            Text("Download")
+                                .outlinedButton()
+                        }
+                    }
+                }
+            }
+            TrendingMoviesHorizontalView(header: "Trending")
+            UpcomingMoviesHorizontalView(header: "Upcoming")
+        }.padding(.horizontal, 10)
+        
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(movieViewModel: MovieViewModel())
 }

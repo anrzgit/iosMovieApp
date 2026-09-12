@@ -8,29 +8,50 @@
 import SwiftUI
 
 struct MovieDetailView: View {
-    let title : Movie
+    let movie : Movie
+    @State private var videoId: String? = nil
     var body: some View {
         GeometryReader{ geometry in
-            VStack(spacing: 10){
-                AsyncImage(url: URL(string: title.poster_path ?? "")){image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geometry.size.width, height: geometry.size.height * 0.7)
-                        .ignoresSafeArea(edges: .top)
+            ScrollView {
+                VStack(spacing: 10){
+                    AsyncImage(url: URL(string: movie.poster_path ?? "")){image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: geometry.size.width, height: geometry.size.height * 0.7)
+                        //                        .ignoresSafeArea(edges: .top)
                         
-                }placeholder: {
-                    Rectangle().fill(Color.gray.opacity(0.3))
+                    }placeholder: {
+                        Rectangle().fill(Color.gray.opacity(0.3))
+                    }
+                    YouTubePlayer(videoId: self.videoId ?? "cxF__10G98M")
+                        .frame(height: 220)
+                    Text(self.movie.title ?? "null")
+                        .textCase(.uppercase)
+                        .fontWeight(.bold)
+                        .font(.system(size: 24))
+                    Text(self.movie.overview ?? "null")
+                        .padding(8)
                 }
-                Text(self.title.title ?? "null")
-                    .textCase(.uppercase)
-                Text(self.title.overview ?? "null")
             }
         }
+        .onAppear() {
+            Task {
+                let videoIdResult: Result<String, any Error> = await MovieViewModel().fetchVideoId(for: movie.title ?? "")
+                switch videoIdResult {
+                case .success(let videoId):
+                    print("Fetched Video ID: \(videoId)")
+                    self.videoId = videoId
+                case .failure(let error):
+                    print("Failed to fetch video ID: \(error)")
+                }
+            }
+        }
+        
     }
 }
 
 #Preview {
-    MovieDetailView(title: Movie.previewTitles[0])
+    MovieDetailView(movie: Movie.previewTitles[0])
 }
 

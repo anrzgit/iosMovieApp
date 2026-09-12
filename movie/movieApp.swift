@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct movieApp: App {
+    
+    var image = Constans.imageBaseURL
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
